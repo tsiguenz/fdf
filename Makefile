@@ -6,30 +6,30 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/22 16:19:59 by tsiguenz         ###   ########.fr        #
+#    Updated: 2021/12/22 18:03:07 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 SRC = *.c
-OBJS = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 %.o:
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $(SRC)
+	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $(SRC)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
 
 all:
 	$(NAME)
 
 clean:
-	rm -f ${OBJS} ${OBJSBONUS}
+	rm -f ${OBJ}
 
 fclean:	clean
-	rm -f ${NAME} ${OBJSBONUS}
+	rm -f ${NAME}
 
 re:	fclean all
 
