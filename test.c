@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:59:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/23 15:50:26 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:43:16 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 int	key_hook(int keycode, t_vars *vars)
 {
 	printf("keycode = %d\n", keycode);
+	return (0);
 }
 
 int	main(void)
