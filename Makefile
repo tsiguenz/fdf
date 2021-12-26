@@ -17,14 +17,17 @@ CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
 UNAME=$(shell uname)
 %.o:
-	$(CC) $(CFLAGS) -I/usr/include -I../mlx -O3 -c $(SRC)
-
+    ifeq ($(UNAME), Linux)
+		$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $(SRC)
+    else
+		$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $(SRC)
+    endif
 $(NAME): $(OBJ)
-	    ifeq ($(UNAME), Linux)
-			$(CC) $(OBJ) -L../ -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
-		else
-			$(CC) $(CFLAGS) -I /usr/include $(SRC) -L ../ -lmlx -framework OpenGl -framework AppKit
-		endif
+    ifeq ($(UNAME), Linux)
+		$(CC) $(OBJ) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+    else
+		$(CC) $(CFLAGS) -I /usr/include $(SRC) -Lmlx -lmlx -framework OpenGl -framework AppKit
+    endif
 	
 all: $(NAME)
 
