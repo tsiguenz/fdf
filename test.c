@@ -6,11 +6,11 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:59:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/23 17:43:16 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/27 20:24:05 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
+#include "mlx/mlx.h"
 #include <stdio.h>
 
 typedef struct	s_data {

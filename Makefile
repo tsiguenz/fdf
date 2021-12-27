@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/23 18:14:52 by tsiguenz         ###   ########.fr        #
+#    Updated: 2021/12/27 20:30:49 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,15 @@ CC = gcc
 UNAME=$(shell uname)
 %.o:
     ifeq ($(UNAME), Linux)
-		$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $(SRC)
+		$(CC) $(CFLAGS) -Imlx -O3 -c $(SRC)
     else
-		$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $(SRC)
+		$(CC) $(CFLAGS) -Imlx -O3 -c $(SRC)
     endif
 $(NAME): $(OBJ)
     ifeq ($(UNAME), Linux)
 		$(CC) $(OBJ) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
     else
-		$(CC) $(CFLAGS) -I /usr/include $(SRC) -Lmlx -lmlx -framework OpenGl -framework AppKit
+		$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)	
     endif
 	
 all: $(NAME)
