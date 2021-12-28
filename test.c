@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:59:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/27 20:24:05 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/28 20:42:18 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-int	key_hook(int keycode, t_vars *vars)
+int	close(int keycode, t_vars *vars)
 {
 	printf("keycode = %d\n", keycode);
+	if (keycode == 53)
+		mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
-
+/*
 int	main(void)
 {
 	t_vars 	vars;
@@ -52,7 +54,8 @@ int	main(void)
 								&img.endian);
 	my_mlx_pixel_put(&img, 0, 0, 0x00FF0000);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 100, 100);
-	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
+*/
