@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 17:26:11 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/28 21:15:14 by tsiguenz         ###   ########.fr       */
+/*   Created: 2021/12/02 12:10:39 by tsiguenz          #+#    #+#             */
+/*   Updated: 2021/12/29 23:09:24 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# define BUFFER_SIZE 10
 
-int	main(void)
-{
-	void	*mlx;
+int		ft_strlen(char *s);
+char	*ft_strdup(char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 
-	mlx = mlx_init();
-	mlx_loop_hook(mlx, render_next_frame, datas);
-	mlx_loop(mlx);
-}
+#endif
