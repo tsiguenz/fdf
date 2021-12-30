@@ -6,13 +6,13 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 12:10:35 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/29 19:18:57 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/30 12:43:19 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "get_next_line.h"
 
-static char	*ft_new_stat(char *stat)
+static char	*gnl_new_stat(char *stat)
 {
 	char	*new_stat;
 	int		i;
@@ -23,15 +23,15 @@ static char	*ft_new_stat(char *stat)
 	while (stat[i] && stat[i] != '\n')
 		i++;
 	if (!stat[i])
-		new_stat = ft_strdup("");
+		new_stat = gnl_strdup("");
 	else
-		new_stat = ft_strdup(stat + i + 1);
+		new_stat = gnl_strdup(stat + i + 1);
 	free(stat);
 	stat = 0;
 	return (new_stat);
 }
 
-static int	ft_len_next_line(char *stat, int read_val)
+static int	gnl_len_next_line(char *stat, int read_val)
 {
 	int	i;
 
@@ -49,19 +49,19 @@ static int	ft_len_next_line(char *stat, int read_val)
 	return (0);
 }
 
-static char	*ft_get_line(char *stat, int read_val)
+static char	*gnl_get_line(char *stat, int read_val)
 {
 	int		i;
 	int		len;
 	char	*res;
 
 	i = 0;
-	len = ft_len_next_line(stat, read_val);
+	len = gnl_len_next_line(stat, read_val);
 	if (!stat || !len || (!*stat && !read_val))
 		return (0);
 	if (len == -1)
-		len = ft_strlen(stat);
-	res = ft_calloc((len + 1), sizeof(char));
+		len = gnl_strlen(stat);
+	res = gnl_calloc((len + 1), sizeof(char));
 	if (!res)
 		return (0);
 	while (stat[i])
@@ -75,7 +75,7 @@ static char	*ft_get_line(char *stat, int read_val)
 	return (res);
 }
 
-static char	*ft_fill_stat(char *stat, int fd, int *read_val)
+static char	*gnl_fill_stat(char *stat, int fd, int *read_val)
 {
 	char	*tmp;
 	char	*new_stat;
@@ -83,14 +83,14 @@ static char	*ft_fill_stat(char *stat, int fd, int *read_val)
 	new_stat = 0;
 	if (!stat && !read_val)
 		return (0);
-	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	tmp = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
 		return (0);
 	*read_val = read(fd, tmp, BUFFER_SIZE);
 	if (!stat)
-		new_stat = ft_strdup(tmp);
+		new_stat = gnl_strdup(tmp);
 	else
-		new_stat = ft_strjoin(stat, tmp);
+		new_stat = gnl_strjoin(stat, tmp);
 	free(tmp);
 	free(stat);
 	return (new_stat);
@@ -106,10 +106,10 @@ char	*get_next_line(int fd)
 	next_line = 0;
 	if ((fd < 0 || fd > FOPEN_MAX) || (!read_val && !stat[fd]))
 		return (0);
-	while (!ft_len_next_line(stat[fd], read_val) && read_val && read_val != -1)
-		stat[fd] = ft_fill_stat(stat[fd], fd, &read_val);
-	next_line = ft_get_line(stat[fd], read_val);
-	stat[fd] = ft_new_stat(stat[fd]);
+	while (!gnl_len_next_line(stat[fd], read_val) && read_val && read_val != -1)
+		stat[fd] = gnl_fill_stat(stat[fd], fd, &read_val);
+	next_line = gnl_get_line(stat[fd], read_val);
+	stat[fd] = gnl_new_stat(stat[fd]);
 	if (!next_line && stat[fd])
 	{
 		free(stat[fd]);

@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/29 23:29:49 by tsiguenz         ###   ########.fr        #
+#    Updated: 2021/12/30 14:56:47 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ_PATH = objs/
 
 # Names
 
-SRC_NAME = get_next_line.c get_next_line_utils.c  parse.c
+SRC_NAME = parse.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files
@@ -31,7 +31,8 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 # Flags
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror 
+#CFLAGS = -Wall -Wextra -Werror
+LIBFT = libft/libft.a
 ifeq ($(UNAME), Linux)
 	MLX = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 else
@@ -39,17 +40,30 @@ else
 endif
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) -g -I/usr/include -Imlx -O3 -o $@ -c $<
+	mkdir -p objs
+	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
 
-all: $(NAME)
+all: obj mlx libft $(NAME)
+
+obj:
+	@mkdir -p $(OBJ_PATH)
+
+libft:
+	@make -C libft/
+
+mlx:
+	@make -C mlx/
 
 clean:
-	rm -f $(OBJ)
+	make clean -C libft/
+	make clean -C mlx/
+	rm -rf $(OBJ_PATH)
 
 fclean:	clean
+	make fclean -C libft/
 	rm -f $(NAME)
 
 re:	fclean all
@@ -57,4 +71,4 @@ re:	fclean all
 debug: $(OBJ)
 	$(CC) -ggdb $(OBJ) $(MLX) -o $(NAME)
 	
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re obj mlx libft

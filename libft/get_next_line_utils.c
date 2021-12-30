@@ -6,13 +6,13 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 12:10:44 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/29 19:19:39 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/30 12:43:41 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "get_next_line.h"
 
-int	ft_strlen(char *s)
+int	gnl_strlen(char *s)
 {
 	int	i;
 
@@ -24,13 +24,13 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *s)
+char	*gnl_strdup(char *s)
 {
 	int		i;
 	char	*dup;
 
 	i = 0;
-	dup = ft_calloc((ft_strlen(s) + 1), sizeof(char));
+	dup = gnl_calloc((gnl_strlen(s) + 1), sizeof(char));
 	if (!dup)
 		return (0);
 	while (s[i])
@@ -41,7 +41,7 @@ char	*ft_strdup(char *s)
 	return (dup);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*gnl_calloc(size_t nmemb, size_t size)
 {
 	size_t	i;
 	void	*ptr;
@@ -60,7 +60,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -68,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	res = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	res = gnl_calloc((gnl_strlen(s1) + gnl_strlen(s2) + 1), sizeof(char));
 	if (!res)
 		return (0);
 	while (s1[i])
