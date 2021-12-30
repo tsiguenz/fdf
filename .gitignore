@@ -3,3 +3,6 @@ fdf
 *.swp
 mlx/
 a.out
+*.a
+*objs/
+libft/.gitignore
