@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 23:22:06 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/30 14:42:02 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2021/12/30 16:24:38 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 int	**parse(char *file)
 {
-	int fd;
-	int	**map;
+	int 	fd;
+	int		**map;
+	char	*get_line;
 
 	fd = open(file, O_RDONLY);
-//	printf("gnl %s", get_next_line(fd));
+	if (fd == -1)
+		return (0);
+	get_line = get_next_line(fd);
+	return (map);
+}
+
+int	*map_split(char *line, int *map)
+{
 	return (map);
 }
 
@@ -47,7 +55,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	map = parse(argv[1]);
-	printf("%d\n", ft_strlen("test"));
+//	if (map == 0)
+//		return (0);
+	printf("%d\n", ft_atoi(" 1 2"));
 //	print_map(map);
 	return (0);
 }

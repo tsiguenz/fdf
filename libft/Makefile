@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/08 19:56:21 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/30 15:20:37 by tsiguenz         ###   ########.fr        #
+#    Updated: 2021/12/30 16:23:12 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,29 +58,28 @@ SRC_NAME = 	ft_atoi.c \
 			get_next_line.c \
 			get_next_line_utils.c
 
-OBJ_NAME = ${SRC_NAME:.c=.o}
+OBJ_NAME = $(SRC_NAME:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-all: ${NAME}
-
-${NAME}: ${OBJ}
-	@echo "Build $(NAME) ..."
+$(NAME): $(OBJ)
+	@echo "Build $(NAME)"
 	@ar -rcs $@ $^
-	@echo "Done !"
 
 $(OBJ_PATH)%.o: %.c
 	@mkdir -p $(OBJ_PATH)
-	@${CC} ${CFLAGS} -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
+all: $(NAME)
 
 clean:
-	@echo "Deleting $(OBJ_PATH) ..."
-	@rm -rf ${OBJ_PATH}
+	@echo "Delete libft/$(OBJ_PATH)"
+	@rm -rf $(OBJ_PATH)
 
 fclean:	clean
-	@echo "Deleting $(NAME) ..."
-	@rm -f ${NAME}
+	@echo "Delete libft/$(NAME)"
+	@rm -f $(NAME)
 
 re:	fclean all
 

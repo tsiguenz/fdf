@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/30 14:56:47 by tsiguenz         ###   ########.fr        #
+#    Updated: 2021/12/30 16:23:21 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
+
+# Flags mlx for Linux and MacOS
+
 ifeq ($(UNAME), Linux)
 	MLX = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 else
@@ -40,16 +43,17 @@ else
 endif
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+	@make -C libft/ --no-print-directory
+
+	@echo "Build $(NAME)"
+	@$(CC) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+	./fdf maps/42.fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	mkdir -p objs
-	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
+	@mkdir -p objs
+	@$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
 
-all: obj mlx libft $(NAME)
-
-obj:
-	@mkdir -p $(OBJ_PATH)
+all: $(NAME)
 
 libft:
 	@make -C libft/
@@ -58,17 +62,18 @@ mlx:
 	@make -C mlx/
 
 clean:
-	make clean -C libft/
-	make clean -C mlx/
-	rm -rf $(OBJ_PATH)
+	@make clean -C libft/ --no-print-directory
+	@echo "Delete fdf/$(OBJ_PATH)"
+	@rm -rf $(OBJ_PATH)
 
 fclean:	clean
-	make fclean -C libft/
-	rm -f $(NAME)
+	@make fclean -C libft/ --no-print-directory
+	@echo "Delete fdf/$(NAME)"
+	@rm -f $(NAME)
 
 re:	fclean all
 
 debug: $(OBJ)
 	$(CC) -ggdb $(OBJ) $(MLX) -o $(NAME)
 	
-.PHONY: all clean fclean re obj mlx libft
+.PHONY: all clean fclean re mlx libft
