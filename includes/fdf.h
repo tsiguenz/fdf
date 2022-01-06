@@ -21,6 +21,13 @@
 # include <sys/stat.h>
 
 # define ESC 65307
+
+typedef struct s_maps {
+	int	**tab;
+	int	ymax;
+	int	xmax;
+}				t_maps;
+
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;

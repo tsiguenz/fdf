@@ -65,7 +65,7 @@ char	***parse(char *file)
 	}
 	return (map);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	char	***map;
@@ -79,3 +79,4 @@ int	main(int argc, char **argv)
 	free(map);
 	return (0);
 }
+*/

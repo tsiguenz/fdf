@@ -20,7 +20,7 @@ OBJ_PATH = objs/
 
 # Names
 
-SRC_NAME = parse.c
+SRC_NAME = init_map.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files
@@ -47,7 +47,7 @@ $(NAME): $(OBJ)
 	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
-	./fdf maps/42.fdf | cat -e
+	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
@@ -72,8 +72,9 @@ fclean:	clean
 	@rm -f $(NAME) db
 
 db: $(SRC)
-	$(CC) $(CFLAGS) -g $(LIBFT) $(MLX) -o $@ $(SRC)
-	lldb $@ maps/42.fdf
+	$(CC) $(CFLAGS) -g $(SRC) $(LIBFT) $(MLX) -o $@
+	gdb $@
+
 re:	fclean all
 
 .PHONY: all clean fclean re mlx libft db
