@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2021/12/30 16:23:21 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/05 19:13:26 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 # Flags
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
 # Flags mlx for Linux and MacOS
@@ -44,9 +44,9 @@ endif
 
 $(NAME): $(OBJ)
 	@make -C libft/ --no-print-directory
-
+	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
-	@$(CC) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 	./fdf maps/42.fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -64,16 +64,16 @@ mlx:
 clean:
 	@make clean -C libft/ --no-print-directory
 	@echo "Delete fdf/$(OBJ_PATH)"
-	@rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH) db
 
 fclean:	clean
 	@make fclean -C libft/ --no-print-directory
 	@echo "Delete fdf/$(NAME)"
-	@rm -f $(NAME)
+	@rm -f $(NAME) db
 
+db: $(SRC)
+	$(CC) $(CFLAGS) -g $(LIBFT) $(MLX) -o $@ $(SRC)
+	lldb $@ maps/42.fdf
 re:	fclean all
 
-debug: $(OBJ)
-	$(CC) -ggdb $(OBJ) $(MLX) -o $(NAME)
-	
-.PHONY: all clean fclean re mlx libft
+.PHONY: all clean fclean re mlx libft db

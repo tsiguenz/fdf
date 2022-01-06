@@ -1,4 +1,6 @@
 fdf
+db
+*.dSYM/
 *.o
 *.swp
 mlx/
