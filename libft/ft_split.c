@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:25:43 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/11/30 19:42:53 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:42:41 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	wordcount(const char *s, char c)
 
 	ctr = 1;
 	i = 0;
-	if (!s[i])
+	if (!s[i] || !s)
 		return (0);
 	while (s[i] == c)
 		i++;

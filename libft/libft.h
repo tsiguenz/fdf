@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 23:22:38 by thibautsi         #+#    #+#             */
-/*   Updated: 2021/11/26 20:41:44 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:35:39 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void		ft_lstdelone(t_list *lst, void (*del) (void *));
 void		ft_lstclear(t_list **lst, void (*del)(void*));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
+int			**ft_2tabnew(int col, int line);
 #endif //LIBFT_H

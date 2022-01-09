@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 00:19:03 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/09 19:24:27 by tsiguenz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 void	print_map(int **map, int ymax, int xmax)
@@ -9,60 +21,62 @@ void	print_map(int **map, int ymax, int xmax)
 	{
 		while (x < xmax)
 		{
-			printf("%d ", map[y][x]);
+			printf(" %d", map[y][x]);
 			x++;
 		}
+		printf("\n");
 		x = 0;
 		y++;
 	}
 }
 
-int	get_ymax(char *filename)
+int	get_max(t_maps *map, char *filename)
 {
 	int		fd;
 	char	c;
-	int		ymax;
 
-	ymax = 0;
+	map->ymax = 0;
+	map->xmax = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (1);
 	while (read(fd, &c, 1) == 1)
-  		if (c == '\n')
-			ymax++;
-	return (ymax);
-}
-
-int	get_xmax(char **split_line)
-{
-	int	i;
-
-	i = 0;
-	while (split_line[i])
-		i++;
-	return (i);
-}
-
-int	**malloc_tab(int ymax, int xmax)
-{
-	int	i;
-	int	**tab;
-
-	i = 0;
-	tab = ft_calloc(ymax, sizeof(int *));
-	if (tab == NULL)
-		return (NULL);
-	while (i < xmax)
 	{
-		tab[ymax - 1] = ft_calloc(xmax, sizeof(int));
-		if (tab == NULL)
-			return (NULL);
+  		if (c == '\n')
+			map->ymax++;
+		if (map->ymax == 0 && c != ' ')
+			map->xmax++;
+	}
+	if (close(fd) == -1)
+		return (1);
+	return (0);
+}
+
+int	gnl(int fd, char **dest)
+{
+	*dest = get_next_line(fd);
+	if (!dest)
+	{
+		get_next_line(fd);
+		return (0);
+	}
+	return (1);
+}
+
+int	destroy_tab(int **tab, int col)
+{
+	int	i;
+
+	i = 0;
+	while (i < col)
+	{
+		free(tab[i]);
 		i++;
 	}
-	return (tab);
+	free(tab);
+	return (0);
 }
-
-void	init(char *file_name, t_maps *map)
+void	fill_table(char *filename, t_maps *map)
 {
 	int		fd;
 	char	*line;
@@ -72,38 +86,34 @@ void	init(char *file_name, t_maps *map)
 
 	y = 0;
 	x = 0;
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1 || get_max(map, filename))
 		return ;
-	line = get_next_line(fd);
-	split_line = ft_split(line, ' ');
-	map->xmax = get_xmax(split_line);
-	map->ymax = get_ymax(file_name);
-	map->tab = malloc_tab(map->ymax, map->xmax);
-	while (y < map->ymax)
+	map->tab = ft_2tabnew(map->ymax, map->xmax);
+	while (y < map->ymax && gnl(fd, &line))
 	{
+		split_line = ft_split(line, ' ');
 		while (x < map->xmax)
 		{
 			map->tab[y][x] = ft_atoi(split_line[x]);
+			free(split_line[x]);
 			x++;
 		}
-		split_line = ft_split(get_next_line(fd), ' ');
+		free(split_line[x]);
+		free(split_line);
+		free(line);
 		x = 0;
 		y++;
 	}
-	printf("%s" ,line);
-	free(line);
-//	destroy(split_line);
 }
 
 
 int	main(void)
 {
 	t_maps map;
-
-	init("maps/42.fdf", &map);
-//	print_map(map.tab, map.ymax, map.xmax);
+	fill_table("maps/test.fdf", &map);
+	print_map(map.tab, map.ymax, map.xmax);
 	(void) map;
-//	destroy_tab(map);
+	destroy_tab(map.tab, map.ymax);
 	return (0);
 }
