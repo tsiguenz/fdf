@@ -6,12 +6,11 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/10 11:28:59 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/10 18:05:42 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-UNAME=$(shell uname)
 
 # Paths
 
@@ -20,7 +19,7 @@ OBJ_PATH = objs/
 
 # Names
 
-SRC_NAME = init_map.c
+SRC_NAME = init_map.c check_file.c  main.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files
@@ -36,17 +35,18 @@ LIBFT = libft/libft.a
 
 # Flags mlx for Linux and MacOS
 
+UNAME=$(shell uname)
 ifeq ($(UNAME), Linux)
-	MLX = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
+	MLXFLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 else
-	MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 endif
 
 $(NAME): $(OBJ)
 	@make -C libft/ --no-print-directory
 	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -54,12 +54,6 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
 
 all: $(NAME)
-
-libft:
-	@make -C libft/
-
-mlx:
-	@make -C mlx/
 
 clean:
 	@make clean -C libft/ --no-print-directory

@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2021/12/30 13:32:40 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:19:09 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
+void	print_tab(int **tab, int ymax, int xmax);
+int		init_map(char *filename, t_maps *map);
 #endif

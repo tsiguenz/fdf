@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/08 19:56:21 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/08 01:37:17 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/10 14:58:04 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,9 @@ SRC_NAME = 	ft_atoi.c \
 			ft_lstmap.c \
 			ft_lstnew.c \
 			ft_lstsize.c \
-			ft_2tabnew.c \
+			ft_tabnew_two.c \
+			ft_destroy_tab_two.c \
+			ft_print_tab_two.c \
 			get_next_line.c \
 			get_next_line_utils.c
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_2tabnew.c                                       :+:      :+:    :+:   */
+/*   ft_tabnew_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 01:32:06 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/09 17:46:04 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:31:25 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	**ft_2tabnew(int col, int line)
+int	**ft_tabnew_two(int col, int line)
 {
 	int	i;
 	int	**tab;
@@ -32,4 +32,3 @@ int	**ft_2tabnew(int col, int line)
 	}
 	return (tab);
 }
-

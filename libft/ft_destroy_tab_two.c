@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   ft_destroy_tab_two.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 17:12:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/10 17:54:35 by tsiguenz         ###   ########.fr       */
+/*   Created: 2022/01/10 13:55:00 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/10 17:30:16 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-int	check_file(char *filename)
+int	ft_destroy_tab_two(int **tab, int col)
 {
-	(void) filename;
+	int	i;
+
+	i = 0;
+	if (!*tab)
+		return (1);
+	while (i < col)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 	return (0);
 }
+
