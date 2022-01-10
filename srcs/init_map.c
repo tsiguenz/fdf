@@ -6,7 +6,7 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 00:19:03 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/09 19:24:27 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/10 11:59:41 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ int	get_max(t_maps *map, char *filename)
 int	gnl(int fd, char **dest)
 {
 	*dest = get_next_line(fd);
-	if (!dest)
-	{
-		get_next_line(fd);
+	if (!*dest)
 		return (0);
-	}
 	return (1);
 }
 
@@ -90,9 +87,10 @@ void	fill_table(char *filename, t_maps *map)
 	if (fd == -1 || get_max(map, filename))
 		return ;
 	map->tab = ft_2tabnew(map->ymax, map->xmax);
-	while (y < map->ymax && gnl(fd, &line))
+	while (gnl(fd, &line) && y < map->ymax)
 	{
 		split_line = ft_split(line, ' ');
+		free(line);
 		while (x < map->xmax)
 		{
 			map->tab[y][x] = ft_atoi(split_line[x]);
@@ -101,7 +99,6 @@ void	fill_table(char *filename, t_maps *map)
 		}
 		free(split_line[x]);
 		free(split_line);
-		free(line);
 		x = 0;
 		y++;
 	}

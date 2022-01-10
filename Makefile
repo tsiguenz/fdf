@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/08 02:06:51 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/10 11:28:59 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 # Flags
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
 # Flags mlx for Linux and MacOS
