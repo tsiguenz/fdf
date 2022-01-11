@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/10 18:05:42 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/11 23:04:32 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_PATH = objs/
 
 # Names
 
-SRC_NAME = init_map.c check_file.c  main.c
+SRC_NAME = init_map.c check_file.c errors.c main.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files

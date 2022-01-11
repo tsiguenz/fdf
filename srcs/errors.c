@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:44:00 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 00:42:10 by tsiguenz         ###   ########.fr       */
+/*   Created: 2022/01/11 18:28:50 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/12 00:45:05 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char **argv)
+int	errors(int err_code)
 {
-	t_maps	map;
-
-	if (argc != 2)
-		return (errors(0));
-	if (check_file(argv[1], map))// || init_map("maps/test.fdf", &map))
+	if (err_code == 0)
+	{
+		ft_putstr_fd("Bad number of arguments\n", 1);
 		return (0);
-//	ft_print_tab_two(map.tab, map.ymax, map.xmax);
-//	ft_destroy_tab_two(map.tab, map.ymax);
-	return (0);
+	}
+	else if (err_code == 1)
+		ft_putstr_fd("Error while opening file\n", 1);
+	else if (err_code == 2)
+		ft_putstr_fd("Error while closing file\n", 1);
+	else if (err_code == 3)
+		ft_putstr_fd("Bad format file\n", 1);
+	else if (err_code == 4)
+		ft_putstr_fd("File is empty\n", 1);
+	return (1);
 }

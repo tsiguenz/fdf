@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 13:55:00 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/10 17:30:16 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:15:21 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ int	ft_destroy_tab_two(int **tab, int col)
 	free(tab);
 	return (0);
 }
-

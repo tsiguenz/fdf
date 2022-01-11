@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_gnl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:44:00 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 00:42:10 by tsiguenz         ###   ########.fr       */
+/*   Created: 2022/01/11 18:12:48 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/11 18:16:34 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include"get_next_line.h"
 
-int	main(int argc, char **argv)
+int	ft_gnl(int fd, char **dest)
 {
-	t_maps	map;
-
-	if (argc != 2)
-		return (errors(0));
-	if (check_file(argv[1], map))// || init_map("maps/test.fdf", &map))
+	*dest = get_next_line(fd);
+	if (!*dest)
 		return (0);
-//	ft_print_tab_two(map.tab, map.ymax, map.xmax);
-//	ft_destroy_tab_two(map.tab, map.ymax);
-	return (0);
+	return (1);
 }

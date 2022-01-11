@@ -6,19 +6,11 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 00:19:03 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/10 17:09:58 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:18:41 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static int	gnl(int fd, char **dest)
-{
-	*dest = get_next_line(fd);
-	if (!*dest)
-		return (0);
-	return (1);
-}
 
 static int	get_max(t_maps *map, char *filename)
 {
@@ -32,7 +24,7 @@ static int	get_max(t_maps *map, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (1);
-	while (gnl(fd, &line))
+	while (ft_gnl(fd, &line))
 	{
 		while (line[i])
 		{
@@ -61,7 +53,7 @@ static void	fill_table(char *filename, t_maps *map)
 	if (fd == -1 || get_max(map, filename))
 		return ;
 	map->tab = ft_tabnew_two(map->ymax, map->xmax);
-	while (gnl(fd, &line) && y < map->ymax)
+	while (ft_gnl(fd, &line) && y < map->ymax)
 	{
 		x = 0;
 		split_line = ft_split(line, ' ');
