@@ -6,40 +6,12 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 00:19:03 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 15:57:55 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:51:48 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-/*
-static int	get_max(t_maps *map, char *filename)
-{
-	int		i;
-	int		fd;
-	char	*line;
 
-	i = 1;
-	map->ymax = 0;
-	map->xmax = 1;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	while (ft_gnl(fd, &line))
-	{
-		while (line[i])
-		{
-			if (line[i] != ' ' && line[i - 1] == ' ')
-				map->xmax++;
-			i++;
-		}
-		free(line);
-		map->ymax++;
-	}
-	if (close(fd) == -1)
-		return (1);
-	return (0);
-}
-*/
 static void	fill_table(char *filename, t_maps *map)
 {
 	int		fd;

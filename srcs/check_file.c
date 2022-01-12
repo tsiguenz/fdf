@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:12:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 16:48:01 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/12 23:33:55 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,14 @@ static int	get_xmax(char *line)
 	return (ret);
 }
 
-int	check_file(char *filename, t_maps *map)
+int	check_file2(int fd, t_maps *map)
 {
 	int		tmp;
-	int		fd;
-	char	*line;
 	int		y;
+	char	*line;
 
-	(void) map;
-	y = 1;
 	tmp = -1;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (errors(1));
+	y = 0;
 	while (ft_gnl(fd, &line))
 	{
 		if (tmp != -1 && (tmp != get_xmax(line) || get_xmax(line) == 0))
@@ -62,11 +57,23 @@ int	check_file(char *filename, t_maps *map)
 		free(line);
 		y++;
 	}
-	map->xmax = tmp;
-	map->ymax = y;
-	if (close(fd) == -1)
-		return (errors(2));
 	if (tmp == -1)
 		return (errors(4));
+	map->xmax = tmp;
+	map->ymax = y;
+	return (0);
+}
+
+int	check_file(char *filename, t_maps *map)
+{
+	int		fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (errors(1));
+	if (check_file2(fd, map))
+		return (1);
+	if (close(fd) == -1)
+		return (errors(2));
 	return (0);
 }
