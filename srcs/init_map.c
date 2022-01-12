@@ -6,12 +6,12 @@
 /*   By: tsiguenz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 00:19:03 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/11 18:18:41 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:57:55 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
+/*
 static int	get_max(t_maps *map, char *filename)
 {
 	int		i;
@@ -39,7 +39,7 @@ static int	get_max(t_maps *map, char *filename)
 		return (1);
 	return (0);
 }
-
+*/
 static void	fill_table(char *filename, t_maps *map)
 {
 	int		fd;
@@ -50,7 +50,7 @@ static void	fill_table(char *filename, t_maps *map)
 
 	y = 0;
 	fd = open(filename, O_RDONLY);
-	if (fd == -1 || get_max(map, filename))
+	if (fd == -1)
 		return ;
 	map->tab = ft_tabnew_two(map->ymax, map->xmax);
 	while (ft_gnl(fd, &line) && y < map->ymax)

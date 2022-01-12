@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:12:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 00:39:53 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:48:01 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ static int	get_xmax(char *line)
 	return (ret);
 }
 
-int	check_file(char *filename, t_maps map)
+int	check_file(char *filename, t_maps *map)
 {
 	int		tmp;
 	int		fd;
 	char	*line;
+	int		y;
 
 	(void) map;
+	y = 1;
 	tmp = -1;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -58,7 +60,10 @@ int	check_file(char *filename, t_maps map)
 		}
 		tmp = get_xmax(line);
 		free(line);
+		y++;
 	}
+	map->xmax = tmp;
+	map->ymax = y;
 	if (close(fd) == -1)
 		return (errors(2));
 	if (tmp == -1)
