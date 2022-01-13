@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:12:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 23:33:55 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:11:43 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	get_xmax(char *line)
 		return (0);
 	while (line[i])
 	{
-		if (!ft_isdigit(line[i]) && line[i] != ' ' && line[i] != '\n')
+		if (!ft_isdigit(line[i]) && line[i] != ' ' && line[i] != '\n'
+			&& line[i] != '-')
 			return (0);
 		if (ft_isdigit(line[i]) && line[i + 1] == ' ')
 			ret++;
