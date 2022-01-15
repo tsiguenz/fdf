@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/12 13:07:14 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:12:36 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,7 @@ void	print_tab(int **tab, int ymax, int xmax);
 int		init_map(char *filename, t_maps *map);
 int		check_file(char *filename, t_maps *map);
 int		errors(int err_code);
+int		render_map(t_maps map);
+int		mlx_close_esc(int keycode, t_vars *vars);
+void	pixel_put(t_data *data, int x, int y, unsigned int color);
 #endif
