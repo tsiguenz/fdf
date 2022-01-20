@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/18 18:58:58 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/20 17:40:05 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_PATH = objs/
 
 # Names
 
-SRC_NAME = init_map.c check_file.c errors.c render_map.c draw_line.c main.c
+SRC_NAME = init_map.c check_file.c errors.c render_map.c project.c main.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files
@@ -46,12 +46,12 @@ $(NAME): $(OBJ)
 	@make -C libft/ --no-print-directory
 	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+	@$(CC) -g $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
-	@$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
+	@$(CC) -g $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
 
 all: $(NAME)
 

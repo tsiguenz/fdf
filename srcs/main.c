@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:44:00 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/19 16:09:15 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:04:58 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 //	if (argc != 2)
 //		return (errors(0));
-	if (check_file("maps/formatted.fdf", &map) || init_map("maps/formatted.fdf", &map))
+	if (check_file("maps/42.fdf", &map) || init_map("maps/42.fdf", &map))
 		return (0);
 	ft_print_tab_two(map.tab, map.ymax, map.xmax);
 	render_map(map);

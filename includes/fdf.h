@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/18 21:36:51 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:34:56 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_maps {
 	int	**tab;
 	int	ymax;
 	int	xmax;
+	int	zoom;
 }				t_maps;
 
 typedef struct s_vars {
@@ -48,5 +49,5 @@ int		errors(int err_code);
 int		render_map(t_maps map);
 int		mlx_close_esc(int keycode, t_vars *vars);
 void	pixel_put(t_data *data, int x, int y, unsigned int color);
-void	draw_line(t_data *img, int x1, int y1, int x2, int y2);
+void	draw_line(t_maps map, t_data *img);
 #endif
