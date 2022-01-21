@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   project.c                                          :+:      :+:    :+:   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 23:21:51 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 14:50:20 by tsiguenz         ###   ########.fr       */
+/*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/21 15:35:39 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+static void	isometric(float *x, float *y, int z)
+{
+	*x = (*x - *y) * cos(deg_to_rad(30));
+	*y = (*x + *y) * sin(deg_to_rad(30)) - z;
+}
 
 static int	ft_max(int a, int b)
 {
@@ -19,24 +25,14 @@ static int	ft_max(int a, int b)
 	return (a);
 }
 
-static int ft_abs(int a)
+static int	ft_abs(int a)
 {
 	if (a < 0)
 		return (-a);
 	return (a);
 }
 
-static float	deg_to_rad(int deg)
-{
-	return ((float)(deg * PI / 180));
-}
-
-void	isometric(float *x, float *y, int z)
-{
-	*x = (*x - *y) * cos(deg_to_rad(30));
-	*y = (*x + *y) * sin(deg_to_rad(30)) - z;
-}
-void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, float z2)
+static void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	float	x_step;
 	float	y_step;

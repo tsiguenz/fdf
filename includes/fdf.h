@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 14:49:18 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:32:06 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ int		render_map(t_maps map);
 int		mlx_close_esc(int keycode, t_vars *vars);
 void	pixel_put(t_data *data, int x, int y, unsigned int color);
 void	draw_line(t_maps map, t_data *img);
+float	deg_to_rad(int deg);
 #endif
