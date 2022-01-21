@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/20 17:40:05 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/21 09:27:12 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,12 @@ $(NAME): $(OBJ)
 	@make -C libft/ --no-print-directory
 	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
-	@$(CC) -g $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+	@$(CC) -g -g0 $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
-	@$(CC) -g $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
+	@$(CC) -g -g0 $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
 
 all: $(NAME)
 

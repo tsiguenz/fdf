@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/20 17:34:56 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:16:12 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_maps {
 	int	**tab;
 	int	ymax;
 	int	xmax;
-	int	zoom;
 }				t_maps;
 
 typedef struct s_vars {
@@ -40,6 +39,7 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		orig;
 }				t_data;
 
 void	print_tab(int **tab, int ymax, int xmax);

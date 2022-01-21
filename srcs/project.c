@@ -6,20 +6,20 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 23:21:51 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/20 19:31:41 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:15:04 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	ft_max(float a, float b)
+static int	ft_max(int a, int b)
 {
 	if (a < b)
 		return (b);
 	return (a);
 }
 
-static float ft_abs(float a)
+static int ft_abs(int a)
 {
 	if (a < 0)
 		return (-a);
@@ -29,9 +29,9 @@ static float ft_abs(float a)
 void	isometric(float *x, float *y, int z)
 {
 	*x = (*x - *y) * cos(0.523599);
-	*y = -z + (*x + *y) * sin(0.523599);
+	*y = (*x + *y) * sin(0.523599) - z;
 }
-void	bresenham(t_data *img, float x1, float y1, int z1, float x2, float y2, int z2)
+void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	float	x_step;
 	float	y_step;
@@ -39,21 +39,20 @@ void	bresenham(t_data *img, float x1, float y1, int z1, float x2, float y2, int 
 
 	(void) z1;
 	(void) z2;
-	x1 *= 10;
-	x2 *= 10;
-	y1 *= 10;
-	y2 *= 10;
+	isometric(&x1, &y1, z1);
+	isometric(&x2, &y2, z2);
+	x1 *= 20;
+	x2 *= 20;
+	y1 *= 20;
+	y2 *= 20;
 	x_step = x2 - x1;
 	y_step = y2 - y1;
-//	isometric(&x1, &y1, z1);
-//	isometric(&x2, &y2, z2);
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
 	x_step /= max;
 	y_step /= max;
-	printf("x1 %d, x2%d, y1%d, y2%d, x_step %d, y_step %d\n", (int)x1, (int)x2, (int) y1, (int)y2, (int)x_step, (int)y_step);
-	while (((int)x1 - (int)x2) || ((int)y1 - (int)y2))
+	while ((int)(x1 - x2) || (int)(y1 - y2))
 	{
-		pixel_put(img, x1, y1, 0x00FFFFFF);
+		pixel_put(img, img->orig + x1,  img->orig + y1, 0x00FFFFFF);
 		x1 += x_step;
 		y1 += y_step;
 	//printf("%d\n", (int)x1 - (int)y1);
