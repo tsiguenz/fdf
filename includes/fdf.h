@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 11:16:12 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:49:18 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 
 # define ESC 65307
+# define PI 3.1415926535
 
 typedef struct s_maps {
 	int	**tab;
@@ -40,6 +41,8 @@ typedef struct s_data {
 	int		line_length;
 	int		endian;
 	int		orig;
+	int		zoom;
+	int		zscale;
 }				t_data;
 
 void	print_tab(int **tab, int ymax, int xmax);

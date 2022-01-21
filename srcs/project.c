@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 23:21:51 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 13:15:04 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:50:20 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,28 @@ static int ft_abs(int a)
 	return (a);
 }
 
+static float	deg_to_rad(int deg)
+{
+	return ((float)(deg * PI / 180));
+}
+
 void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * cos(0.523599);
-	*y = (*x + *y) * sin(0.523599) - z;
+	*x = (*x - *y) * cos(deg_to_rad(30));
+	*y = (*x + *y) * sin(deg_to_rad(30)) - z;
 }
 void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	float	x_step;
 	float	y_step;
-	int	max;
+	int		max;
 
-	(void) z1;
-	(void) z2;
-	isometric(&x1, &y1, z1);
-	isometric(&x2, &y2, z2);
-	x1 *= 20;
-	x2 *= 20;
-	y1 *= 20;
-	y2 *= 20;
+	x1 *= img->zoom;
+	x2 *= img->zoom;
+	y1 *= img->zoom;
+	y2 *= img->zoom;
+	isometric(&x1, &y1, z1 * img->zscale);
+	isometric(&x2, &y2, z2 * img->zscale);
 	x_step = x2 - x1;
 	y_step = y2 - y1;
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
@@ -55,7 +58,6 @@ void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, fl
 		pixel_put(img, img->orig + x1,  img->orig + y1, 0x00FFFFFF);
 		x1 += x_step;
 		y1 += y_step;
-	//printf("%d\n", (int)x1 - (int)y1);
 	}
 }
 
