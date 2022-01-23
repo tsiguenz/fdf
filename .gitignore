@@ -3,7 +3,6 @@ db
 *.dSYM/
 *.o
 *.swp
-mlx/
 a.out
 *.a
 *objs/
