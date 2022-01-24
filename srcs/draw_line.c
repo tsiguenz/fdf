@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 18:15:45 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:16:56 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * tan(deg_to_rad(30));
-	*y = (*x + *y) * sin(deg_to_rad(30)) - z;
+	*x = (*x - *y) * cos(deg_to_rad(45));
+	*y = (*x + *y) * sin(deg_to_rad(45)) - z;
 }
 
 static int	ft_max(int a, int b)

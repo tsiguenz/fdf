@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:57:19 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/21 18:16:38 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:07:11 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	render_map(t_maps map)
 	t_data	mlx;
 
 	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1000, 1000, "fdf");
-	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 900, 900);
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 700, 700, "fdf");
+	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 700, 700);
 	mlx.addr = mlx_get_data_addr(mlx.img_ptr, &mlx.bits_per_pixel,
 								&mlx.line_length, &mlx.endian);
-	mlx.orig = 300;
-	mlx.zoom = 40;
+	mlx.orig = 200;
+	mlx.zoom = 20;
 	mlx.zscale = 2;
 	mlx_key_hook(mlx.win_ptr, mlx_close_esc, &mlx);
 	draw_line(map, &mlx);
