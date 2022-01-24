@@ -6,44 +6,35 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/23 16:16:56 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:15:22 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	isometric(float *x, float *y, int z)
+void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * cos(deg_to_rad(45));
-	*y = (*x + *y) * sin(deg_to_rad(45)) - z;
+	int	angle;
+
+	angle = 30;
+	*x = *x * cos(deg_to_rad(angle)) - *y * sin(deg_to_rad(angle));
+	*y = *y * cos(deg_to_rad(angle)) + *x * sin(deg_to_rad(angle)) - z;
 }
 
-static int	ft_max(int a, int b)
-{
-	if (a < b)
-		return (b);
-	return (a);
-}
-
-static int	ft_abs(int a)
-{
-	if (a < 0)
-		return (-a);
-	return (a);
-}
-
-static void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float y2, float z2)
+static void	bresenham(t_data *mlx, float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	float	x_step;
 	float	y_step;
 	int		max;
 
-	x1 *= img->zoom;
-	x2 *= img->zoom;
-	y1 *= img->zoom;
-	y2 *= img->zoom;
-	isometric(&x1, &y1, z1 * img->zscale);
-	isometric(&x2, &y2, z2 * img->zscale);
+	(void) z1;
+	(void) z2;
+	x1 *= mlx->zoom;
+	x2 *= mlx->zoom;
+	y1 *= mlx->zoom;
+	y2 *= mlx->zoom;
+	isometric(&x1, &y1, z1 * mlx->zscale);
+	isometric(&x2, &y2, z2 * mlx->zscale);
 	x_step = x2 - x1;
 	y_step = y2 - y1;
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
@@ -51,7 +42,8 @@ static void	bresenham(t_data *img, float x1, float y1, float z1, float x2, float
 	y_step /= max;
 	while ((int)(x1 - x2) || (int)(y1 - y2))
 	{
-		pixel_put(img, img->orig + x1,  img->orig + y1, 0x00FFFFFF);
+		pixel_put(mlx, x1 + mlx->xorig, y1 + mlx->yorig, 0xFFFFFFFF);
+		//printf("x1 = %f, y1 = %f\n", img->xorig + x1, img->yorig + y1);
 		x1 += x_step;
 		y1 += y_step;
 	}

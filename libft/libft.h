@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 23:22:38 by thibautsi         #+#    #+#             */
-/*   Updated: 2022/01/11 18:14:02 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/24 14:23:37 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ int			**ft_tabnew_two(int col, int line);
 int			ft_destroy_tab_two(int **tab, int col);
 void		ft_print_tab_two(int **tab, int col, int line);
 int			ft_gnl(int fd, char **dest);
+int			ft_max(int a, int b);
+int			ft_abs(int a);
 #endif //LIBFT_H

@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:57:19 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/23 16:07:11 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:58:59 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,40 @@ static int	mlx_close_esc(int keycode, t_data *mlx)
 	return (0);
 }
 
+void	camera_init(t_maps map, t_data *mlx)
+{
+	double	x;
+	double	y;
+	int		offsetx;
+	int		offsety;
+
+	x = map.xmax;
+	y = map.ymax;
+	mlx->win_len = 700;
+	mlx->zoom = (mlx->win_len - 200) / map.xmax;
+	offsetx = cos(deg_to_rad(30)) * x - sin(deg_to_rad(30)) * y;
+	offsetx *= mlx->zoom;
+	offsety = cos(deg_to_rad(30)) * y + sin(deg_to_rad(30)) * x;
+	offsety *= mlx->zoom;
+	mlx->xorig = (mlx->win_len - offsetx) / 2;
+	mlx->yorig = (mlx->win_len - offsety) / 2;
+	mlx->zscale = 1; // require map.zmax and map.zmin
+}
+
 int	render_map(t_maps map)
 {
 
 	t_data	mlx;
 
+	camera_init(map, &mlx);
 	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 700, 700, "fdf");
-	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 700, 700);
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, mlx.win_len, mlx.win_len, "fdf");
+	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, mlx.win_len, mlx.win_len);
 	mlx.addr = mlx_get_data_addr(mlx.img_ptr, &mlx.bits_per_pixel,
 								&mlx.line_length, &mlx.endian);
-	mlx.orig = 200;
-	mlx.zoom = 20;
-	mlx.zscale = 2;
 	mlx_key_hook(mlx.win_ptr, mlx_close_esc, &mlx);
 	draw_line(map, &mlx);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 50, 50);
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
 	return(0);
 }

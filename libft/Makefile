@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/08 19:56:21 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/11 18:15:03 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/24 14:23:19 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ SRC_NAME = 	ft_atoi.c \
 			ft_print_tab_two.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			ft_gnl.c
+			ft_gnl.c \
+			ft_max.c \
+			ft_abs.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 CC = gcc

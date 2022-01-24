@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:44:00 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/24 10:13:58 by tsiguenz         ###   ########.fr       */
+/*   Created: 2022/01/24 13:36:52 by tsiguenz          #+#    #+#             */
+/*   Updated: 2022/01/24 13:40:33 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_max(int a, int b)
 {
-	t_maps	map;
-
-	if (argc != 2)
-		return (errors(0));
-	if (check_file(argv[1], &map) || init_map(argv[1], &map))
-		return (0);
-	ft_print_tab_two(map.tab, map.ymax, map.xmax);
-	render_map(map);
-	ft_destroy_tab_two(map.tab, map.ymax);
-	return (0);
+	if (a < b)
+		return (b);
+	return (a);
 }

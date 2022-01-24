@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/21 15:35:57 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/24 14:12:48 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_NAME = 	init_map.c \
 			errors.c \
 			utils.c \
 			main.c
+
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 # Files
@@ -37,7 +38,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-LIBFT = libft/libft.a
+LIBFT = libft/libft.a -Ilibft
 
 # Flags mlx for Linux and MacOS
 
@@ -48,18 +49,21 @@ else
 	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 endif
 
+all: lib $(NAME)
+
 $(NAME): $(OBJ)
-	@make -C libft/ --no-print-directory
-	@make -C mlx/ --no-print-directory
 	@echo "Build $(NAME)"
-	@$(CC) -g -g0 $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+	@$(CC) -g $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
-	@$(CC) -g -g0 $(CFLAGS) -I/usr/include -Imlx -O3 -o $@ -c $<
+	@echo "test 2"
+	$(CC) -g $(CFLAGS) $(LIBFT) -I/usr/include -Imlx -o $@ -c $<
 
-all: $(NAME)
+lib:
+	@make -C libft/ --no-print-directory
+	@make -C mlx/ --no-print-directory
 
 clean:
 	@make clean -C libft/ --no-print-directory
@@ -71,10 +75,6 @@ fclean:	clean
 	@echo "Delete fdf/$(NAME)"
 	@rm -f $(NAME) db
 
-db: $(SRC)
-	$(CC) $(CFLAGS) -g $(SRC) $(LIBFT) $(MLX) -o $@
-	gdb $@
-
 re:	fclean all
 
-.PHONY: all clean fclean re mlx libft db
+.PHONY: all clean fclean re lib
