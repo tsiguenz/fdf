@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:54:58 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/10 16:54:14 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:10:07 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_print_tab_two(int **tab, int col, int line)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while (y < col)
 	{
+		x = 0;
 		while (x < line)
 		{
 			if (tab[y][x] > 9 && x > 0)
@@ -31,7 +31,6 @@ void	ft_print_tab_two(int **tab, int col, int line)
 			x++;
 		}
 		write(1, "\n", 1);
-		x = 0;
 		y++;
 	}
 }
