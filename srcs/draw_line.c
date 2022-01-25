@@ -6,53 +6,39 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 12:33:08 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:54:14 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	isometric(float *x, float *y, int z)
+t_point2d	isometric(t_point3d point, t_data *mlx)
 {
-	int	angle;
+	t_point2d	ret;
 
-	angle = 30;
-	*x = *x * cos(deg_to_rad(angle)) - *y * sin(deg_to_rad(angle));
-	*y = *y * cos(deg_to_rad(angle)) + *x * sin(deg_to_rad(angle)) - z;
+	point.x *= mlx->zoom;
+	point.y *= mlx->zoom;
+	point.z *= mlx->zscale;
+	ret.x = (point.x - point.y) / sqrt(2);
+	ret.y = (point.x - 2 * point.z + point.y) / sqrt(6);
+	return (ret);
 }
 
-static void	bresenham(t_data *mlx, float x1, float y1, float z1, float x2, float y2, float z2)
+static t_point3d	fill_point3d(int x, int y, int z)
 {
-	float	x_step;
-	float	y_step;
-	int		max;
+	t_point3d	p;
 
-	(void) z1;
-	(void) z2;
-	x1 *= mlx->zoom;
-	x2 *= mlx->zoom;
-	y1 *= mlx->zoom;
-	y2 *= mlx->zoom;
-	isometric(&x1, &y1, z1 * mlx->zscale);
-	isometric(&x2, &y2, z2 * mlx->zscale);
-	x_step = x2 - x1;
-	y_step = y2 - y1;
-	max = ft_max(ft_abs(x_step), ft_abs(y_step));
-	x_step /= max;
-	y_step /= max;
-	while ((int)(x1 - x2) || (int)(y1 - y2))
-	{
-		pixel_put(mlx, x1 + mlx->xorig, y1 + mlx->yorig, 0xFFFFFFFF);
-		//printf("x1 = %f, y1 = %f\n", img->xorig + x1, img->yorig + y1);
-		x1 += x_step;
-		y1 += y_step;
-	}
+	p.x = x;
+	p.y = y;
+	p.z = z;
+	return (p);
 }
-
-void	draw_line(t_maps map, t_data *img)
+void	draw_line(t_maps map, t_data *mlx)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	t_point3d	p1;
+	t_point3d	p2;
 
 	y = 0;
 	while (y < map.ymax)
@@ -60,10 +46,17 @@ void	draw_line(t_maps map, t_data *img)
 		x = 0;
 		while (x < map.xmax)
 		{
+			p1 = fill_point3d(x, y, map.tab[y][x]);
 			if (x < map.xmax - 1)
-				bresenham(img, x, y, map.tab[y][x], x + 1, y, map.tab[y][x + 1]);
+			{
+				p2 = fill_point3d(x + 1, y, map.tab[y][x + 1]);
+				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx)); // don't forget mlx->orig
+			}
 			if (y < map.ymax - 1)
-				bresenham(img, x, y, map.tab[y][x], x, y + 1, map.tab[y + 1][x]);
+			{
+				p2 = fill_point3d(x, y + 1, map.tab[y + 1][x]);
+				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx)); // don't forget mlx->orig
+			}
 			x++;
 		}
 		y++;

@@ -59,5 +59,7 @@ Substitution :
 :%s/ancien/nouveau/gc	avec invite pour confirmer
 
 
-netrw explorateur de fichier vim
-:make lance make et remplis la quickfix list
+netrw 	explorateur de fichier vim
+:make 	lance make et remplis la quickfix list
+:copen	open quickfixlist
+:ccl 	close quickfixlist

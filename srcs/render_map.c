@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:57:19 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 12:46:14 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:07:29 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	camera_init(t_maps map, t_data *mlx)
 	if (map.xmax != map.ymax)
 		mlx->zoom = (mlx->win_len - 200) / map.xmax - map.ymax;
 	else
-		mlx->zoom = (mlx->win_len - 200) / map.xmax;
+		mlx->zoom = (mlx->win_len - 200) / map.xmax / 2;
 	offsetx = cos(deg_to_rad(30)) * x - sin(deg_to_rad(30)) * y;
 	offsety = cos(deg_to_rad(30)) * y + sin(deg_to_rad(30)) * x;
 	printf("x %d, y %d, zoom %d\n", offsetx, offsety ,mlx->zoom);
@@ -52,7 +52,7 @@ void	camera_init(t_maps map, t_data *mlx)
 	mlx->xorig = (mlx->win_len - offsetx) / 2;
 	mlx->yorig = (mlx->win_len - offsety) / 2;
 	printf("x %d, y %d, zoom %d %d\n", offsetx, offsety ,mlx->zoom, map.zmax);
-	mlx->zscale = 1;
+	mlx->zscale = 2;
 }
 
 int	render_map(t_maps map)
