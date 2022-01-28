@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 18:54:14 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/28 18:34:03 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ t_point2d	isometric(t_point3d point, t_data *mlx)
 	return (ret);
 }
 
-static t_point3d	fill_point3d(int x, int y, int z)
-{
-	t_point3d	p;
-
-	p.x = x;
-	p.y = y;
-	p.z = z;
-	return (p);
-}
 void	draw_line(t_maps map, t_data *mlx)
 {
 	int			x;
@@ -50,12 +41,12 @@ void	draw_line(t_maps map, t_data *mlx)
 			if (x < map.xmax - 1)
 			{
 				p2 = fill_point3d(x + 1, y, map.tab[y][x + 1]);
-				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx)); // don't forget mlx->orig
+				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx));
 			}
 			if (y < map.ymax - 1)
 			{
 				p2 = fill_point3d(x, y + 1, map.tab[y + 1][x]);
-				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx)); // don't forget mlx->orig
+				bresenham(mlx, isometric(p1, mlx), isometric(p2, mlx));
 			}
 			x++;
 		}

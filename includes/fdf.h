@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 18:47:24 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/28 18:36:52 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,7 @@ void		draw_line(t_maps map, t_data *mlx);
 float		deg_to_rad(int deg);
 t_point2d	isometric(t_point3d point, t_data *mlx);
 void		bresenham(t_data *mlx, t_point2d orig1, t_point2d orig2);
+t_point2d	fill_point2d(int x, int y);
+t_point3d	fill_point3d(int x, int y, int z);
+void		camera_init(t_maps map, t_data *mlx);
 #endif

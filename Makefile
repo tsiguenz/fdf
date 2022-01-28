@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/25 18:45:17 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/01/28 16:37:56 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_NAME = 	init_map.c \
 			draw_line.c \
 			errors.c \
 			bresenham.c \
+			init_camera.c \
 			utils.c \
 			main.c
 

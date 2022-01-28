@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 18:38:41 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 18:54:38 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/28 12:52:02 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int    update_above(t_point2d *p0, t_point2d *pd, t_point2d *ps, int err)
 {
-    err += (*pd).y;
-    p0->x += (*ps).x;
+    err += pd->y;
+    p0->x += ps->x;
     return (err);
 }
 
 int    update_below(t_point2d *p0, t_point2d *pd, t_point2d *ps, int err)
 {
-    err += (*pd).x;
-    p0->y += (*ps).y;
+    err += pd->x;
+    p0->y += ps->y;
     return (err);
 }
 

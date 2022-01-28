@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:57:19 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 15:07:29 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:34:28 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,6 @@ static int	mlx_close_esc(int keycode, t_data *mlx)
 	return (0);
 }
 
-void	camera_init(t_maps map, t_data *mlx)
-{
-	int	x;
-	int	y;
-	int	offsetx;
-	int	offsety;
-
-	x = map.xmax;
-	y = map.ymax;
-	mlx->win_len = 700;
-	if (map.xmax != map.ymax)
-		mlx->zoom = (mlx->win_len - 200) / map.xmax - map.ymax;
-	else
-		mlx->zoom = (mlx->win_len - 200) / map.xmax / 2;
-	offsetx = cos(deg_to_rad(30)) * x - sin(deg_to_rad(30)) * y;
-	offsety = cos(deg_to_rad(30)) * y + sin(deg_to_rad(30)) * x;
-	printf("x %d, y %d, zoom %d\n", offsetx, offsety ,mlx->zoom);
-	offsetx *= mlx->zoom;
-	offsety *= mlx->zoom;
-	mlx->xorig = (mlx->win_len - offsetx) / 2;
-	mlx->yorig = (mlx->win_len - offsety) / 2;
-	printf("x %d, y %d, zoom %d %d\n", offsetx, offsety ,mlx->zoom, map.zmax);
-	mlx->zscale = 2;
-}
 
 int	render_map(t_maps map)
 {
