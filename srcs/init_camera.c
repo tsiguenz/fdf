@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:34:39 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/29 18:32:19 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 10:59:53 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static void	init_orig(t_maps map, t_data *mlx)
 	y3 = fill_point3d(map.ymax / 2, map.ymax / 2, 0);
 	x2 = isometric(x3, mlx);
 	y2 = isometric(y3, mlx);
-	printf("origine :\n");
-	printf("x %d, y %d\n", x2.x, y2.y);
 	mlx->xorig = mlx->win_len / 2 - x2.x;
 	mlx->yorig = mlx->win_len / 2 - y2.y;
-	printf("xorig %d, yorig %d\n", mlx->xorig, mlx->yorig);
-	printf("------------------------------------\n");
 }
+
+//static void	init_values(t_point3d p, t_point2d *min, t_point2d *max)
+//{
+//	
+//}
 
 static int init_zoom(t_maps map, t_data *mlx)
 {
@@ -77,8 +78,7 @@ static int init_zscale(t_maps map, t_data *mlx)
 	t_point2d	min;
 
 	y = 0;
-	printf("zscale = %f\n", mlx->zscale);
-	mlx->zscale /= 2;
+	mlx->zscale += 1;
 	max = fill_point2d(0, 0);
 	min = fill_point2d(0, 0);
 	while (y < map.ymax)
@@ -95,8 +95,8 @@ static int init_zscale(t_maps map, t_data *mlx)
 		}
 		y++;
 	}
-	if (max.y - min.y > mlx->win_len - 50)
-		return (mlx->zscale / 4);
+	if (max.y - min.y > mlx->win_len - 50 || max.y - min.y < 50)
+		return (mlx->zscale / 5);
 	else
 		return (init_zscale(map, mlx));
 }
@@ -106,11 +106,7 @@ void	camera_init(t_maps map, t_data *mlx)
 	mlx->win_len = 700;
 	mlx->zoom = 0;
 	mlx->zoom = init_zoom(map, mlx);
-// si la map ne rentre pas avec un zoom de 1
-	printf("zoom = %d\n", mlx->zoom);
-	mlx->zscale = 10;
+	mlx->zscale = 0;
 	mlx->zscale = init_zscale(map, mlx);
-	printf("zscale = %f\n", mlx->zscale);
 	init_orig(map, mlx);
 }
-

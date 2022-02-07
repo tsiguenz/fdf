@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/29 18:31:41 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:41:28 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_data {
 	int		xorig;
 	int		yorig;
 	int		zoom;
-	float		zscale;
+	int		zscale;
 	int		win_len;
 }				t_data;
 
