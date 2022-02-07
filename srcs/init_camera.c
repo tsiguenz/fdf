@@ -6,21 +6,21 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:34:39 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/02/07 11:44:40 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:30:26 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	init_orig(t_maps map, t_data *mlx)
+static void	init_orig(t_maps *map, t_data *mlx)
 {
 	t_point3d	x3;
 	t_point3d	y3;
 	t_point2d	x2;
 	t_point2d	y2;
 
-	x3 = fill_point3d(map.xmax / 2, map.ymax / 2, 0);
-	y3 = fill_point3d(map.ymax / 2, map.ymax / 2, 0);
+	x3 = fill_point3d(map->xmax / 2, map->ymax / 2, 0);
+	y3 = fill_point3d(map->ymax / 2, map->ymax / 2, 0);
 	x2 = isometric(x3, mlx);
 	y2 = isometric(y3, mlx);
 	mlx->xorig = mlx->win_len / 2 - x2.x;
@@ -49,7 +49,7 @@ static void	init_values(t_point2d p, t_point2d *max, t_point2d *min, int i)
 	}
 }
 
-static int	init_zoom(t_maps map, t_data *mlx)
+static int	init_zoom(t_maps *map, t_data *mlx)
 {
 	int			x;
 	int			y;
@@ -61,10 +61,10 @@ static int	init_zoom(t_maps map, t_data *mlx)
 	mlx->zoom += 1;
 	max = fill_point2d(0, 0);
 	min = fill_point2d(0, 0);
-	while (y < map.ymax && mlx->zoom)
+	while (y < map->ymax && mlx->zoom)
 	{
 		x = 0;
-		while (x < map.xmax)
+		while (x < map->xmax)
 		{
 			p = isometric(fill_point3d(x, y, 0), mlx);
 			init_values(p, &max, &min, 0);
@@ -77,7 +77,7 @@ static int	init_zoom(t_maps map, t_data *mlx)
 	return (init_zoom(map, mlx));
 }
 
-static int	init_zscale(t_maps map, t_data *mlx)
+static int	init_zscale(t_maps *map, t_data *mlx)
 {
 	int			x;
 	int			y;
@@ -89,12 +89,12 @@ static int	init_zscale(t_maps map, t_data *mlx)
 	mlx->zscale += 1;
 	max = fill_point2d(0, 0);
 	min = fill_point2d(0, 0);
-	while (y < map.ymax)
+	while (y < map->ymax)
 	{
 		x = 0;
-		while (x < map.xmax)
+		while (x < map->xmax)
 		{
-			p = isometric(fill_point3d(x, y, map.tab[y][x]), mlx);
+			p = isometric(fill_point3d(x, y, map->tab[y][x]), mlx);
 			init_values(p, &max, &min, 1);
 			x++;
 		}
@@ -105,12 +105,12 @@ static int	init_zscale(t_maps map, t_data *mlx)
 	return (init_zscale(map, mlx));
 }
 
-void	camera_init(t_maps map, t_data *mlx)
+void	camera_init(t_data *mlx)
 {
 	mlx->win_len = 700;
 	mlx->zoom = 0;
 	mlx->zscale = 0;
-	mlx->zoom = init_zoom(map, mlx);
-	mlx->zscale = init_zscale(map, mlx);
-	init_orig(map, mlx);
+	mlx->zoom = init_zoom(mlx->map, mlx);
+	mlx->zscale = init_zscale(mlx->map, mlx);
+	init_orig(mlx->map, mlx);
 }

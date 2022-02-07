@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/01/28 16:37:56 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/02/07 15:00:55 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,26 +42,17 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a -Ilibft
 
-# Flags mlx for Linux and MacOS
-
-UNAME=$(shell uname)
-ifeq ($(UNAME), Linux)
-	MLXFLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
-else
-	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
-endif
+MLXFLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 all: lib $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Build $(NAME)"
 	@$(CC) -g $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
-	./fdf | cat -e
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
-	@echo "test 2"
-	$(CC) -g $(CFLAGS) $(LIBFT) -I/usr/include -Imlx -o $@ -c $<
+	@$(CC) -g $(CFLAGS) -I/usr/include -Ilibft -Imlx -o $@ -c $<
 
 lib:
 	@make -C libft/ --no-print-directory
@@ -69,6 +60,7 @@ lib:
 
 clean:
 	@make clean -C libft/ --no-print-directory
+	@make clean -C mlx/ --no-print-directory
 	@echo "Delete fdf/$(OBJ_PATH)"
 	@rm -rf $(OBJ_PATH) db
 

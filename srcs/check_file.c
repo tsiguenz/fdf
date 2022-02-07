@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:12:57 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/25 10:52:19 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:55:11 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ static int	check_file2(int fd, t_maps *map)
 	return (0);
 }
 
+int	free_gnl(int fd)
+{
+	while (get_next_line(fd))
+		;
+	return (1);
+}
+
 int	check_file(char *filename, t_maps *map)
 {
 	int		fd;
@@ -73,7 +80,7 @@ int	check_file(char *filename, t_maps *map)
 	if (fd == -1)
 		return (errors(1));
 	if (check_file2(fd, map))
-		return (1);
+		return (free_gnl(fd));
 	if (close(fd) == -1)
 		return (errors(2));
 	return (0);

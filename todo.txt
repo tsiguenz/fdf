@@ -1,5 +1,0 @@
-- Fonction pour fermer le programme avec la croix rouge
-- Créer une fonction qui dessine une ligne avec l'algo de bresenham
-- Déterminer l'espace entre les points a l'aide des valeurs min et max de x/y/z
-- Placer les points pour la projection isometrique
-- Relier les points de la projection
