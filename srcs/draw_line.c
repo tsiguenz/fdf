@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:51:40 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/02/07 13:16:39 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:21:33 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_line(t_maps *map, t_data *mlx)
 	t_point3d	p1;
 	t_point3d	p2;
 
-	y = 0;
+	y = -1;
 	while (++y < map->ymax)
 	{
 		x = 0;
