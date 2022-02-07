@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:34:39 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/02/07 10:59:53 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 11:44:40 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,29 @@ static void	init_orig(t_maps map, t_data *mlx)
 	mlx->yorig = mlx->win_len / 2 - y2.y;
 }
 
-//static void	init_values(t_point3d p, t_point2d *min, t_point2d *max)
-//{
-//	
-//}
+static void	init_values(t_point2d p, t_point2d *max, t_point2d *min, int i)
+{
+	if (i == 0)
+	{
+		if (p.x > max->x)
+			max->x = p.x;
+		if (p.x < min->x)
+			min->x = p.x;
+		if (p.y > max->y)
+			max->y = p.y;
+		if (p.y < min->y)
+			min->y = p.y;
+	}
+	if (i == 1)
+	{
+		if (p.y > max->y)
+			max->y = p.y;
+		if (p.y < min->y)
+			min->y = p.y;
+	}
+}
 
-static int init_zoom(t_maps map, t_data *mlx)
+static int	init_zoom(t_maps map, t_data *mlx)
 {
 	int			x;
 	int			y;
@@ -42,7 +59,6 @@ static int init_zoom(t_maps map, t_data *mlx)
 
 	y = 0;
 	mlx->zoom += 1;
-	mlx->zscale = 0;
 	max = fill_point2d(0, 0);
 	min = fill_point2d(0, 0);
 	while (y < map.ymax && mlx->zoom)
@@ -51,25 +67,17 @@ static int init_zoom(t_maps map, t_data *mlx)
 		while (x < map.xmax)
 		{
 			p = isometric(fill_point3d(x, y, 0), mlx);
-			if (p.x > max.x)
-				max.x = p.x;
-			if (p.x < min.x)
-				min.x = p.x;
-			if (p.y > max.y)
-				max.y = p.y;
-			if (p.y < min.y)
-				min.y = p.y;
+			init_values(p, &max, &min, 0);
 			x++;
 		}
 		y++;
 	}
 	if (max.x - min.x > mlx->win_len - 50 || max.y - min.y > mlx->win_len - 50)
 		return (mlx->zoom - 1);
-	else
-		return (init_zoom(map, mlx));
+	return (init_zoom(map, mlx));
 }
 
-static int init_zscale(t_maps map, t_data *mlx)
+static int	init_zscale(t_maps map, t_data *mlx)
 {
 	int			x;
 	int			y;
@@ -87,26 +95,22 @@ static int init_zscale(t_maps map, t_data *mlx)
 		while (x < map.xmax)
 		{
 			p = isometric(fill_point3d(x, y, map.tab[y][x]), mlx);
-			if (p.y > max.y)
-				max.y = p.y;
-			if (p.y < min.y)
-				min.y = p.y;
+			init_values(p, &max, &min, 1);
 			x++;
 		}
 		y++;
 	}
 	if (max.y - min.y > mlx->win_len - 50 || max.y - min.y < 50)
 		return (mlx->zscale / 5);
-	else
-		return (init_zscale(map, mlx));
+	return (init_zscale(map, mlx));
 }
 
 void	camera_init(t_maps map, t_data *mlx)
 {
 	mlx->win_len = 700;
 	mlx->zoom = 0;
-	mlx->zoom = init_zoom(map, mlx);
 	mlx->zscale = 0;
+	mlx->zoom = init_zoom(map, mlx);
 	mlx->zscale = init_zscale(map, mlx);
 	init_orig(map, mlx);
 }

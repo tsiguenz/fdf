@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:20:22 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/02/07 09:41:28 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:02:20 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data {
 	int		zoom;
 	int		zscale;
 	int		win_len;
+	t_maps	map;
 }				t_data;
 
 typedef struct 	s_point3d {

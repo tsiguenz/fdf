@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:57:19 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/01/28 16:34:28 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 11:58:22 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	mlx_close_esc(int keycode, t_data *mlx)
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr);
+		free(mlx);
 		exit(0);
 	}
 	return (0);
