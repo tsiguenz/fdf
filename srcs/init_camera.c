@@ -6,7 +6,7 @@
 /*   By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:34:39 by tsiguenz          #+#    #+#             */
-/*   Updated: 2022/02/07 13:30:26 by tsiguenz         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:42:36 by tsiguenz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	camera_init(t_data *mlx)
 	mlx->zoom = 0;
 	mlx->zscale = 0;
 	mlx->zoom = init_zoom(mlx->map, mlx);
-	mlx->zscale = init_zscale(mlx->map, mlx);
+	if (mlx->map->zmax != 0)
+		mlx->zscale = init_zscale(mlx->map, mlx);
 	init_orig(mlx->map, mlx);
 }

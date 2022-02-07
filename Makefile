@@ -6,7 +6,7 @@
 #    By: tsiguenz <tsiguenz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/22 16:08:15 by tsiguenz          #+#    #+#              #
-#    Updated: 2022/02/07 15:00:55 by tsiguenz         ###   ########.fr        #
+#    Updated: 2022/02/07 15:46:27 by tsiguenz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,11 @@ all: lib $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Build $(NAME)"
-	@$(CC) -g $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p objs
-	@$(CC) -g $(CFLAGS) -I/usr/include -Ilibft -Imlx -o $@ -c $<
+	@$(CC) $(CFLAGS) -I/usr/include -Ilibft -Imlx -o $@ -c $<
 
 lib:
 	@make -C libft/ --no-print-directory
@@ -62,12 +62,10 @@ clean:
 	@make clean -C libft/ --no-print-directory
 	@make clean -C mlx/ --no-print-directory
 	@echo "Delete fdf/$(OBJ_PATH)"
-	@rm -rf $(OBJ_PATH) db
 
 fclean:	clean
 	@make fclean -C libft/ --no-print-directory
 	@echo "Delete fdf/$(NAME)"
-	@rm -f $(NAME) db
 
 re:	fclean all
 
